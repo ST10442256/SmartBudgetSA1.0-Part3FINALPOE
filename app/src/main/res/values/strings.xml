@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SmartBudget SA</string>
+    <string name="dashboard_title">Dashboard</string>
+    <string name="safe_to_spend">Safe-to-Spend</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="monthly_budget">Monthly Budget</string>
+    <string name="budget_remaining">Remaining: R%s</string>
+    <string name="overspending_alert">Warning: Overspending in %s!</string>
+    <string name="recent_expenses">Recent Expenses</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="reports">Reports</string>
+    <string name="categories">Categories</string>
+    <string name="profile">Profile</string>
+    <string name="adjust_budget">Adjust Budget</string>
+    <string name="set_budget">Set Budget</string>
+    <string name="enter_budget">Enter new monthly budget</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="reset_expenses">Reset expenses for this budget period</string>
+</resources>
