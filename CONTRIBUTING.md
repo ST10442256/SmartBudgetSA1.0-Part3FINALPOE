@@ -55,7 +55,7 @@ Suggest features by opening an issue with:
 
 1. **Fork and Clone**:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/SmartBudgetSA1.0-Part2OPSC.git
+   git clone https://github.com/ST10442256/SmartBudgetSA1.0-Part2OPSC.git
    cd SmartBudgetSA1.0-Part2OPSC
    ```
 
