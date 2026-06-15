@@ -46,8 +46,9 @@ SmartBudget SA 1.0 is a comprehensive personal finance management application de
 - [x] **Automated Testing:** Unit tests for `BudgetManager` logic.
 - [x] **App Icon & Assets:** Custom icons used throughout the app.
 
-## Video Demonstration
-[Link to Video Presentation](https://vt.tiktok.com/ZSQ4qjFCT/)
+## Presentation Video
+Click the link below to watch the application demonstration:
+- **[Watch Presentation Video](https://vt.tiktok.com/ZSQ4qjFCT/)**
 
 ## Design Considerations
 The app utilizes a modern Jetpack Compose UI with a "Night Sky" theme, featuring a stars background and high-contrast Material 3 components for better visibility and aesthetics. Persistence is handled through SharedPreferences with JSON serialization for simplicity and efficiency in a mobile context.
