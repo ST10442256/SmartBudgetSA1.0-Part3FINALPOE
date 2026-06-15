@@ -197,14 +197,6 @@ fun CategoryGoalsComparison(
     }
 }
 
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.foundation.shape.CircleShape
 
 @Composable
 fun SpendingLineChart(expenses: List<com.example.smartbudgetsa10.model.Expense>) {
@@ -364,6 +356,9 @@ fun CategoryBarChart(
         }
     }
 }
+
+@Composable
+fun Section(title: String, content: @Composable () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(
             text = title,

@@ -50,6 +50,12 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
     val safeToSpend = if (remainingBudget > 0.0) remainingBudget else 0.0
     val progress = if (monthlyBudget > 0.0) (totalExpenses / monthlyBudget).toFloat() else 0f
 
+    val goals = remember(context) { BudgetManager.getCategoryGoals(context) }
+    val overspentCategories = remember(expenses, goals) {
+        val categoryTotals = expenses.groupBy { it.category }.mapValues { it.value.sumOf { e -> e.amount } }
+        goals.filter { goal -> (categoryTotals[goal.category] ?: 0.0) > goal.maxAmount }.map { it.category }
+    }
+
     if (showBudgetDialog) {
         AdjustBudgetDialog(
             currentBudget = monthlyBudget,
@@ -78,9 +84,16 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
         item {
             BudgetProgressSection(progress, remainingBudget, currency)
         }
-        if (totalExpenses > monthlyBudget) {
+        
+        overspentCategories.forEach { category ->
             item {
-                AlertSection()
+                AlertSection(categoryName = category)
+            }
+        }
+        
+        if (totalExpenses > monthlyBudget && overspentCategories.isEmpty()) {
+            item {
+                AlertSection(categoryName = "Total Budget")
             }
         }
 
@@ -244,7 +257,7 @@ fun BudgetProgressSection(progress: Float, remaining: Double, currency: String) 
 }
 
 @Composable
-fun AlertSection() {
+fun AlertSection(categoryName: String) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
@@ -253,10 +266,18 @@ fun AlertSection() {
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_dashboard), // Using an existing icon
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.error,
+                modifier = Modifier.size(24.dp)
+            )
+            Spacer(modifier = Modifier.width(12.dp))
             Text(
-                text = stringResource(R.string.overspending_alert, "Entertainment"),
+                text = stringResource(R.string.overspending_alert, categoryName),
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.error
+                color = MaterialTheme.colorScheme.error,
+                fontWeight = FontWeight.Bold
             )
         }
     }
