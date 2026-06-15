@@ -1,0 +1,158 @@
+<html>
+<head>
+<title>ReportsScreen.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReportsScreen.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">screens</span>
+
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">background</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.*</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">MaterialTheme</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">Text</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">Composable</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Alignment</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Modifier</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Color</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">unit</span><span class="s2">.</span><span class="s1">dp</span>
+
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">remember</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">Canvas</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Path</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">drawscope</span><span class="s2">.</span><span class="s1">Stroke</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">platform</span><span class="s2">.</span><span class="s1">LocalContext</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">BudgetManager</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">ReportsScreen</span><span class="s2">(</span><span class="s1">modifier: Modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">) {</span>
+    <span class="s0">val </span><span class="s1">context </span><span class="s2">= </span><span class="s1">LocalContext</span><span class="s2">.</span><span class="s1">current</span>
+    <span class="s0">val </span><span class="s1">expenses </span><span class="s2">= </span><span class="s1">remember</span><span class="s2">(</span><span class="s1">context</span><span class="s2">) { </span><span class="s1">BudgetManager</span><span class="s2">.</span><span class="s1">getExpenses</span><span class="s2">(</span><span class="s1">context</span><span class="s2">) }</span>
+    
+    <span class="s1">Column</span><span class="s2">(</span>
+        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">modifier</span>
+            <span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">()</span>
+            <span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s3">16</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">),</span>
+        <span class="s1">verticalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">spacedBy</span><span class="s2">(</span><span class="s3">24</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">),</span>
+    <span class="s2">) {</span>
+        <span class="s1">Text</span><span class="s2">(</span>
+            <span class="s1">text </span><span class="s2">= </span><span class="s4">&quot;Financial Reports&quot;</span><span class="s2">,</span>
+            <span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">headlineMedium</span><span class="s2">,</span>
+            <span class="s1">color </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span>
+        <span class="s2">)</span>
+
+        <span class="s1">Section</span><span class="s2">(</span><span class="s1">title </span><span class="s2">= </span><span class="s4">&quot;Spending Trends&quot;</span><span class="s2">) {</span>
+            <span class="s1">SpendingLineChart</span><span class="s2">(</span><span class="s1">expenses</span><span class="s2">)</span>
+        <span class="s2">}</span>
+
+        <span class="s1">Section</span><span class="s2">(</span><span class="s1">title </span><span class="s2">= </span><span class="s4">&quot;Category Distribution&quot;</span><span class="s2">) {</span>
+            <span class="s1">CategoryPieChart</span><span class="s2">(</span><span class="s1">expenses</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">SpendingLineChart</span><span class="s2">(</span><span class="s1">expenses: List</span><span class="s2">&lt;</span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">model</span><span class="s2">.</span><span class="s1">Expense</span><span class="s2">&gt;) {</span>
+    <span class="s0">val </span><span class="s1">spendingData </span><span class="s2">= </span><span class="s1">expenses</span><span class="s2">.</span><span class="s1">sortedBy </span><span class="s2">{ </span><span class="s1">it</span><span class="s2">.</span><span class="s1">date </span><span class="s2">}.</span><span class="s1">takeLast</span><span class="s2">(</span><span class="s3">10</span><span class="s2">).</span><span class="s1">map </span><span class="s2">{ </span><span class="s1">it</span><span class="s2">.</span><span class="s1">amount</span><span class="s2">.</span><span class="s1">toFloat</span><span class="s2">() }</span>
+    
+    <span class="s1">Box</span><span class="s2">(</span>
+        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+            <span class="s2">.</span><span class="s1">fillMaxWidth</span><span class="s2">()</span>
+            <span class="s2">.</span><span class="s1">height</span><span class="s2">(</span><span class="s3">200</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)</span>
+            <span class="s2">.</span><span class="s1">background</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">DarkGray</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s3">0.2f</span><span class="s2">), </span><span class="s1">shape </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">shapes</span><span class="s2">.</span><span class="s1">medium</span><span class="s2">),</span>
+        <span class="s1">contentAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">Center</span>
+    <span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">spendingData</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">Text</span><span class="s2">(</span><span class="s4">&quot;No data available&quot;</span><span class="s2">, </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">)</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">Canvas</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">().</span><span class="s1">padding</span><span class="s2">(</span><span class="s3">16</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)) {</span>
+                <span class="s0">val </span><span class="s1">width </span><span class="s2">= </span><span class="s1">size</span><span class="s2">.</span><span class="s1">width</span>
+                <span class="s0">val </span><span class="s1">height </span><span class="s2">= </span><span class="s1">size</span><span class="s2">.</span><span class="s1">height</span>
+                <span class="s0">val </span><span class="s1">maxAmount </span><span class="s2">= </span><span class="s1">spendingData</span><span class="s2">.</span><span class="s1">maxOrNull</span><span class="s2">() </span><span class="s1">?: </span><span class="s3">1f</span>
+                <span class="s0">val </span><span class="s1">stepX </span><span class="s2">= </span><span class="s1">width </span><span class="s2">/ (</span><span class="s1">spendingData</span><span class="s2">.</span><span class="s1">size </span><span class="s2">- </span><span class="s3">1</span><span class="s2">).</span><span class="s1">coerceAtLeast</span><span class="s2">(</span><span class="s3">1</span><span class="s2">)</span>
+                
+                <span class="s0">val </span><span class="s1">path </span><span class="s2">= </span><span class="s1">Path</span><span class="s2">().</span><span class="s1">apply </span><span class="s2">{</span>
+                    <span class="s1">spendingData</span><span class="s2">.</span><span class="s1">forEachIndexed </span><span class="s2">{ </span><span class="s1">index</span><span class="s2">, </span><span class="s1">amount </span><span class="s2">-&gt;</span>
+                        <span class="s0">val </span><span class="s1">x </span><span class="s2">= </span><span class="s1">index </span><span class="s2">* </span><span class="s1">stepX</span>
+                        <span class="s0">val </span><span class="s1">y </span><span class="s2">= </span><span class="s1">height </span><span class="s2">- (</span><span class="s1">amount </span><span class="s2">/ </span><span class="s1">maxAmount </span><span class="s2">* </span><span class="s1">height</span><span class="s2">)</span>
+                        <span class="s0">if </span><span class="s2">(</span><span class="s1">index </span><span class="s2">== </span><span class="s3">0</span><span class="s2">) </span><span class="s1">moveTo</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">) </span><span class="s0">else </span><span class="s1">lineTo</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">y</span><span class="s2">)</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+                <span class="s1">drawPath</span><span class="s2">(</span><span class="s1">path</span><span class="s2">, </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">(</span><span class="s3">0xFFFF9800</span><span class="s2">), </span><span class="s1">style </span><span class="s2">= </span><span class="s1">Stroke</span><span class="s2">(</span><span class="s1">width </span><span class="s2">= </span><span class="s3">4f</span><span class="s2">))</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">CategoryPieChart</span><span class="s2">(</span><span class="s1">expenses: List</span><span class="s2">&lt;</span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">model</span><span class="s2">.</span><span class="s1">Expense</span><span class="s2">&gt;) {</span>
+    <span class="s0">val </span><span class="s1">categoryTotals </span><span class="s2">= </span><span class="s1">expenses</span><span class="s2">.</span><span class="s1">groupBy </span><span class="s2">{ </span><span class="s1">it</span><span class="s2">.</span><span class="s1">category </span><span class="s2">}</span>
+        <span class="s2">.</span><span class="s1">mapValues </span><span class="s2">{ </span><span class="s1">it</span><span class="s2">.</span><span class="s1">value</span><span class="s2">.</span><span class="s1">sumOf </span><span class="s2">{ </span><span class="s1">exp </span><span class="s2">-&gt; </span><span class="s1">exp</span><span class="s2">.</span><span class="s1">amount </span><span class="s2">}.</span><span class="s1">toFloat</span><span class="s2">() }</span>
+    
+    <span class="s0">val </span><span class="s1">total </span><span class="s2">= </span><span class="s1">categoryTotals</span><span class="s2">.</span><span class="s1">values</span><span class="s2">.</span><span class="s1">sum</span><span class="s2">()</span>
+    <span class="s0">val </span><span class="s1">colors </span><span class="s2">= </span><span class="s1">listOf</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">(</span><span class="s3">0xFFFF9800</span><span class="s2">), </span><span class="s1">Color</span><span class="s2">(</span><span class="s3">0xFF2196F3</span><span class="s2">), </span><span class="s1">Color</span><span class="s2">(</span><span class="s3">0xFF4CAF50</span><span class="s2">), </span><span class="s1">Color</span><span class="s2">(</span><span class="s3">0xFFF44336</span><span class="s2">), </span><span class="s1">Color</span><span class="s2">(</span><span class="s3">0xFF9C27B0</span><span class="s2">))</span>
+
+    <span class="s1">Box</span><span class="s2">(</span>
+        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+            <span class="s2">.</span><span class="s1">fillMaxWidth</span><span class="s2">()</span>
+            <span class="s2">.</span><span class="s1">height</span><span class="s2">(</span><span class="s3">200</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)</span>
+            <span class="s2">.</span><span class="s1">background</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">DarkGray</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s3">0.2f</span><span class="s2">), </span><span class="s1">shape </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">shapes</span><span class="s2">.</span><span class="s1">medium</span><span class="s2">),</span>
+        <span class="s1">contentAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">Center</span>
+    <span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">categoryTotals</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">Text</span><span class="s2">(</span><span class="s4">&quot;No data available&quot;</span><span class="s2">, </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">)</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">Row</span><span class="s2">(</span><span class="s1">verticalAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">CenterVertically</span><span class="s2">) {</span>
+                <span class="s1">Canvas</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(</span><span class="s3">150</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)) {</span>
+                    <span class="s0">var </span><span class="s1">startAngle </span><span class="s2">= </span><span class="s3">0f</span>
+                    <span class="s1">categoryTotals</span><span class="s2">.</span><span class="s1">values</span><span class="s2">.</span><span class="s1">forEachIndexed </span><span class="s2">{ </span><span class="s1">index</span><span class="s2">, </span><span class="s1">amount </span><span class="s2">-&gt;</span>
+                        <span class="s0">val </span><span class="s1">sweepAngle </span><span class="s2">= (</span><span class="s1">amount </span><span class="s2">/ </span><span class="s1">total</span><span class="s2">) * </span><span class="s3">360f</span>
+                        <span class="s1">drawArc</span><span class="s2">(</span>
+                            <span class="s1">color </span><span class="s2">= </span><span class="s1">colors</span><span class="s2">[</span><span class="s1">index </span><span class="s2">% </span><span class="s1">colors</span><span class="s2">.</span><span class="s1">size</span><span class="s2">],</span>
+                            <span class="s1">startAngle </span><span class="s2">= </span><span class="s1">startAngle</span><span class="s2">,</span>
+                            <span class="s1">sweepAngle </span><span class="s2">= </span><span class="s1">sweepAngle</span><span class="s2">,</span>
+                            <span class="s1">useCenter </span><span class="s2">= </span><span class="s0">true</span>
+                        <span class="s2">)</span>
+                        <span class="s1">startAngle </span><span class="s2">+= </span><span class="s1">sweepAngle</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+                <span class="s1">Spacer</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">width</span><span class="s2">(</span><span class="s3">16</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">))</span>
+                <span class="s1">Column </span><span class="s2">{</span>
+                    <span class="s1">categoryTotals</span><span class="s2">.</span><span class="s1">keys</span><span class="s2">.</span><span class="s1">forEachIndexed </span><span class="s2">{ </span><span class="s1">index</span><span class="s2">, </span><span class="s1">category </span><span class="s2">-&gt;</span>
+                        <span class="s1">Row</span><span class="s2">(</span><span class="s1">verticalAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">CenterVertically</span><span class="s2">) {</span>
+                            <span class="s1">Box</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(</span><span class="s3">12</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">).</span><span class="s1">background</span><span class="s2">(</span><span class="s1">colors</span><span class="s2">[</span><span class="s1">index </span><span class="s2">% </span><span class="s1">colors</span><span class="s2">.</span><span class="s1">size</span><span class="s2">]))</span>
+                            <span class="s1">Spacer</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">width</span><span class="s2">(</span><span class="s3">4</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">))</span>
+                            <span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s1">category</span><span class="s2">, </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">, </span><span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">bodySmall</span><span class="s2">)</span>
+                        <span class="s2">}</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">Section</span><span class="s2">(</span><span class="s1">title: String</span><span class="s2">, </span><span class="s1">content: @Composable </span><span class="s2">() -&gt; </span><span class="s1">Unit</span><span class="s2">) {</span>
+    <span class="s1">Column</span><span class="s2">(</span><span class="s1">verticalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">spacedBy</span><span class="s2">(</span><span class="s3">8</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)) {</span>
+        <span class="s1">Text</span><span class="s2">(</span>
+            <span class="s1">text </span><span class="s2">= </span><span class="s1">title</span><span class="s2">,</span>
+            <span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">titleLarge</span><span class="s2">,</span>
+            <span class="s1">color </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span>
+        <span class="s2">)</span>
+        <span class="s1">content</span><span class="s2">()</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

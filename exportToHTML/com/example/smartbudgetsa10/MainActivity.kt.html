@@ -1,0 +1,249 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">setContent</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">enableEdgeToEdge</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">background</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.*</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">shape</span><span class="s2">.</span><span class="s1">CircleShape</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.*</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.*</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Alignment</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Modifier</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Brush</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Color</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">platform</span><span class="s2">.</span><span class="s1">LocalContext</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">res</span><span class="s2">.</span><span class="s1">painterResource</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">res</span><span class="s2">.</span><span class="s1">stringResource</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">tooling</span><span class="s2">.</span><span class="s1">preview</span><span class="s2">.</span><span class="s1">Preview</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">unit</span><span class="s2">.</span><span class="s1">dp</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">screens</span><span class="s2">.*</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">theme</span><span class="s2">.*</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">BiometricHelper</span>
+<span class="s1">import kotlin</span><span class="s2">.</span><span class="s1">random</span><span class="s2">.</span><span class="s1">Random</span>
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity</span><span class="s2">() {</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState: Bundle?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">)</span>
+        <span class="s1">enableEdgeToEdge</span><span class="s2">()</span>
+        <span class="s1">setContent </span><span class="s2">{</span>
+            <span class="s1">SmartBudgetSA10Theme </span><span class="s2">{</span>
+                <span class="s0">var </span><span class="s1">currentNavState by remember </span><span class="s2">{ </span><span class="s1">mutableStateOf</span><span class="s2">(</span><span class="s1">value </span><span class="s2">= </span><span class="s1">NavState</span><span class="s2">.</span><span class="s1">Login</span><span class="s2">) }</span>
+                <span class="s0">var </span><span class="s1">isUnlocked by remember </span><span class="s2">{ </span><span class="s1">mutableStateOf</span><span class="s2">(</span><span class="s1">value </span><span class="s2">= </span><span class="s0">false</span><span class="s2">) }</span>
+
+                <span class="s1">Box</span><span class="s2">(</span>
+                    <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+                        <span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">()</span>
+                        <span class="s2">.</span><span class="s1">background</span><span class="s2">(</span>
+                            <span class="s1">brush </span><span class="s2">= </span><span class="s1">Brush</span><span class="s2">.</span><span class="s1">verticalGradient</span><span class="s2">(</span>
+                                <span class="s1">colors </span><span class="s2">= </span><span class="s1">listOf</span><span class="s2">(</span><span class="s1">NightSkyStart</span><span class="s2">, </span><span class="s1">NightSkyEnd</span><span class="s2">),</span>
+                            <span class="s2">),</span>
+                        <span class="s2">)</span>
+                <span class="s2">) {</span>
+                    <span class="s1">StarsBackground</span><span class="s2">()</span>
+
+                    <span class="s0">when </span><span class="s2">(</span><span class="s1">currentNavState</span><span class="s2">) {</span>
+                        <span class="s1">NavState</span><span class="s2">.</span><span class="s1">Login </span><span class="s2">-&gt; </span><span class="s1">LoginScreen</span><span class="s2">(</span>
+                            <span class="s1">onLoginSuccess </span><span class="s2">= { </span>
+                                <span class="s1">currentNavState </span><span class="s2">= </span><span class="s1">NavState</span><span class="s2">.</span><span class="s1">BiometricCheck</span>
+                            <span class="s2">},</span>
+                            <span class="s1">onNavigateToRegister </span><span class="s2">= { </span><span class="s1">currentNavState </span><span class="s2">= </span><span class="s1">NavState</span><span class="s2">.</span><span class="s1">Register </span><span class="s2">},</span>
+                        <span class="s2">)</span>
+                        <span class="s1">NavState</span><span class="s2">.</span><span class="s1">Register </span><span class="s2">-&gt; </span><span class="s1">RegisterScreen</span><span class="s2">(</span>
+                            <span class="s1">onRegisterSuccess </span><span class="s2">= { </span><span class="s1">currentNavState </span><span class="s2">= </span><span class="s1">NavState</span><span class="s2">.</span><span class="s1">Login </span><span class="s2">},</span>
+                            <span class="s1">onNavigateToLogin </span><span class="s2">= { </span><span class="s1">currentNavState </span><span class="s2">= </span><span class="s1">NavState</span><span class="s2">.</span><span class="s1">Login </span><span class="s2">},</span>
+                        <span class="s2">)</span>
+                        <span class="s1">NavState</span><span class="s2">.</span><span class="s1">BiometricCheck </span><span class="s2">-&gt; {</span>
+                            <span class="s0">val </span><span class="s1">biometricAvailable </span><span class="s2">= </span><span class="s1">remember </span><span class="s2">{ </span><span class="s1">BiometricHelper</span><span class="s2">.</span><span class="s1">isBiometricAvailable</span><span class="s2">(</span><span class="s0">this</span><span class="s1">@MainActivity</span><span class="s2">) }</span>
+                            <span class="s0">if </span><span class="s2">(!</span><span class="s1">biometricAvailable </span><span class="s2">|| </span><span class="s1">isUnlocked</span><span class="s2">) {</span>
+                                <span class="s1">MainApp</span><span class="s2">()</span>
+                            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                                <span class="s1">BiometricUnlockScreen </span><span class="s2">{</span>
+                                    <span class="s1">isUnlocked </span><span class="s2">= </span><span class="s0">true</span>
+                                <span class="s2">}</span>
+                            <span class="s2">}</span>
+                        <span class="s2">}</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">enum </span><span class="s0">class </span><span class="s1">NavState </span><span class="s2">{</span>
+    <span class="s1">Login</span><span class="s2">, </span><span class="s1">Register</span><span class="s2">, </span><span class="s1">BiometricCheck</span>
+<span class="s2">}</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">BiometricUnlockScreen</span><span class="s2">(</span><span class="s1">onSuccess: </span><span class="s2">() -&gt; </span><span class="s1">Unit</span><span class="s2">) {</span>
+    <span class="s0">val </span><span class="s1">activity </span><span class="s2">= </span><span class="s1">LocalContext</span><span class="s2">.</span><span class="s1">current </span><span class="s0">as </span><span class="s1">AppCompatActivity</span>
+
+    <span class="s1">LaunchedEffect</span><span class="s2">(</span><span class="s1">Unit</span><span class="s2">) {</span>
+        <span class="s1">BiometricHelper</span><span class="s2">.</span><span class="s1">showBiometricPrompt</span><span class="s2">(</span>
+            <span class="s1">activity </span><span class="s2">= </span><span class="s1">activity</span><span class="s2">,</span>
+            <span class="s1">onSuccess </span><span class="s2">= </span><span class="s1">onSuccess</span><span class="s2">,</span>
+        <span class="s2">) {</span>
+            <span class="s3">/* Handle error */</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">Column</span><span class="s2">(</span>
+        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">(),</span>
+        <span class="s1">verticalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">Center</span><span class="s2">,</span>
+        <span class="s1">horizontalAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">CenterHorizontally</span><span class="s2">,</span>
+    <span class="s2">) {</span>
+        <span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s4">&quot;SmartBudget SA is locked&quot;</span><span class="s2">, </span><span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">headlineMedium</span><span class="s2">)</span>
+        <span class="s1">Spacer</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">height</span><span class="s2">(</span><span class="s1">height </span><span class="s2">= </span><span class="s5">16</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">))</span>
+        <span class="s1">Button</span><span class="s2">(</span>
+            <span class="s1">onClick </span><span class="s2">= {</span>
+                <span class="s1">BiometricHelper</span><span class="s2">.</span><span class="s1">showBiometricPrompt</span><span class="s2">(</span>
+                    <span class="s1">activity </span><span class="s2">= </span><span class="s1">activity</span><span class="s2">,</span>
+                    <span class="s1">onSuccess </span><span class="s2">= </span><span class="s1">onSuccess</span><span class="s2">,</span>
+                <span class="s2">) {</span>
+                    <span class="s3">/* Handle error */</span>
+                <span class="s2">}</span>
+            <span class="s2">},</span>
+        <span class="s2">) {</span>
+            <span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s4">&quot;Unlock with Biometrics&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">MainApp</span><span class="s2">() {</span>
+    <span class="s0">var </span><span class="s1">currentScreen by remember </span><span class="s2">{ </span><span class="s1">mutableStateOf</span><span class="s2">(</span><span class="s1">value </span><span class="s2">= </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Dashboard</span><span class="s2">) }</span>
+
+    <span class="s1">Scaffold</span><span class="s2">(</span>
+        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">(),</span>
+        <span class="s1">containerColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">Transparent</span><span class="s2">,</span>
+        <span class="s1">bottomBar </span><span class="s2">= {</span>
+            <span class="s1">NavigationBar</span><span class="s2">(</span>
+                <span class="s1">containerColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">Black</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.5f</span><span class="s2">),</span>
+                <span class="s1">contentColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">,</span>
+            <span class="s2">) {</span>
+                <span class="s1">NavigationBarItem</span><span class="s2">(</span>
+                    <span class="s1">selected </span><span class="s2">= </span><span class="s1">currentScreen </span><span class="s2">== </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Dashboard</span><span class="s2">,</span>
+                    <span class="s1">onClick </span><span class="s2">= { </span><span class="s1">currentScreen </span><span class="s2">= </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Dashboard </span><span class="s2">},</span>
+                    <span class="s1">icon </span><span class="s2">= { </span><span class="s1">Icon</span><span class="s2">(</span><span class="s1">painterResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">ic_dashboard</span><span class="s2">), </span><span class="s1">contentDescription </span><span class="s2">= </span><span class="s0">null</span><span class="s2">) },</span>
+                    <span class="s1">label </span><span class="s2">= { </span><span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s1">stringResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">dashboard_title</span><span class="s2">), </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">) },</span>
+                    <span class="s1">colors </span><span class="s2">= </span><span class="s1">NavigationBarItemDefaults</span><span class="s2">.</span><span class="s1">colors</span><span class="s2">(</span>
+                        <span class="s1">selectedIconColor </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span><span class="s2">,</span>
+                        <span class="s1">unselectedIconColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.7f</span><span class="s2">),</span>
+                        <span class="s1">indicatorColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.1f</span><span class="s2">),</span>
+                    <span class="s2">),</span>
+                <span class="s2">)</span>
+                <span class="s1">NavigationBarItem</span><span class="s2">(</span>
+                    <span class="s1">selected </span><span class="s2">= </span><span class="s1">currentScreen </span><span class="s2">== </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">AddExpense</span><span class="s2">,</span>
+                    <span class="s1">onClick </span><span class="s2">= { </span><span class="s1">currentScreen </span><span class="s2">= </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">AddExpense </span><span class="s2">},</span>
+                    <span class="s1">icon </span><span class="s2">= { </span><span class="s1">Icon</span><span class="s2">(</span><span class="s1">painterResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">ic_add</span><span class="s2">), </span><span class="s1">contentDescription </span><span class="s2">= </span><span class="s0">null</span><span class="s2">) },</span>
+                    <span class="s1">label </span><span class="s2">= { </span><span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s1">stringResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">add_expense</span><span class="s2">), </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">) },</span>
+                    <span class="s1">colors </span><span class="s2">= </span><span class="s1">NavigationBarItemDefaults</span><span class="s2">.</span><span class="s1">colors</span><span class="s2">(</span>
+                        <span class="s1">selectedIconColor </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span><span class="s2">,</span>
+                        <span class="s1">unselectedIconColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.7f</span><span class="s2">),</span>
+                        <span class="s1">indicatorColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.1f</span><span class="s2">),</span>
+                    <span class="s2">),</span>
+                <span class="s2">)</span>
+                <span class="s1">NavigationBarItem</span><span class="s2">(</span>
+                    <span class="s1">selected </span><span class="s2">= </span><span class="s1">currentScreen </span><span class="s2">== </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Reports</span><span class="s2">,</span>
+                    <span class="s1">onClick </span><span class="s2">= { </span><span class="s1">currentScreen </span><span class="s2">= </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Reports </span><span class="s2">},</span>
+                    <span class="s1">icon </span><span class="s2">= { </span><span class="s1">Icon</span><span class="s2">(</span><span class="s1">painterResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">ic_reports</span><span class="s2">), </span><span class="s1">contentDescription </span><span class="s2">= </span><span class="s0">null</span><span class="s2">) },</span>
+                    <span class="s1">label </span><span class="s2">= { </span><span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s1">stringResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">reports</span><span class="s2">), </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">) },</span>
+                    <span class="s1">colors </span><span class="s2">= </span><span class="s1">NavigationBarItemDefaults</span><span class="s2">.</span><span class="s1">colors</span><span class="s2">(</span>
+                        <span class="s1">selectedIconColor </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span><span class="s2">,</span>
+                        <span class="s1">unselectedIconColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.7f</span><span class="s2">),</span>
+                        <span class="s1">indicatorColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.1f</span><span class="s2">),</span>
+                    <span class="s2">),</span>
+                <span class="s2">)</span>
+                <span class="s1">NavigationBarItem</span><span class="s2">(</span>
+                    <span class="s1">selected </span><span class="s2">= </span><span class="s1">currentScreen </span><span class="s2">== </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Categories</span><span class="s2">,</span>
+                    <span class="s1">onClick </span><span class="s2">= { </span><span class="s1">currentScreen </span><span class="s2">= </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Categories </span><span class="s2">},</span>
+                    <span class="s1">icon </span><span class="s2">= { </span><span class="s1">Icon</span><span class="s2">(</span><span class="s1">painterResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">ic_categories</span><span class="s2">), </span><span class="s1">contentDescription </span><span class="s2">= </span><span class="s0">null</span><span class="s2">) },</span>
+                    <span class="s1">label </span><span class="s2">= { </span><span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s1">stringResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">categories</span><span class="s2">), </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">) },</span>
+                    <span class="s1">colors </span><span class="s2">= </span><span class="s1">NavigationBarItemDefaults</span><span class="s2">.</span><span class="s1">colors</span><span class="s2">(</span>
+                        <span class="s1">selectedIconColor </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span><span class="s2">,</span>
+                        <span class="s1">unselectedIconColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.7f</span><span class="s2">),</span>
+                        <span class="s1">indicatorColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.1f</span><span class="s2">),</span>
+                    <span class="s2">),</span>
+                <span class="s2">)</span>
+                <span class="s1">NavigationBarItem</span><span class="s2">(</span>
+                    <span class="s1">selected </span><span class="s2">= </span><span class="s1">currentScreen </span><span class="s2">== </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Profile</span><span class="s2">,</span>
+                    <span class="s1">onClick </span><span class="s2">= { </span><span class="s1">currentScreen </span><span class="s2">= </span><span class="s1">Screen</span><span class="s2">.</span><span class="s1">Profile </span><span class="s2">},</span>
+                    <span class="s1">icon </span><span class="s2">= { </span><span class="s1">Icon</span><span class="s2">(</span><span class="s1">painterResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">ic_profile</span><span class="s2">), </span><span class="s1">contentDescription </span><span class="s2">= </span><span class="s0">null</span><span class="s2">) },</span>
+                    <span class="s1">label </span><span class="s2">= { </span><span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s1">stringResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">string</span><span class="s2">.</span><span class="s1">profile</span><span class="s2">), </span><span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">) },</span>
+                    <span class="s1">colors </span><span class="s2">= </span><span class="s1">NavigationBarItemDefaults</span><span class="s2">.</span><span class="s1">colors</span><span class="s2">(</span>
+                        <span class="s1">selectedIconColor </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span><span class="s2">,</span>
+                        <span class="s1">unselectedIconColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.7f</span><span class="s2">),</span>
+                        <span class="s1">indicatorColor </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">White</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s5">0.1f</span><span class="s2">),</span>
+                    <span class="s2">),</span>
+                <span class="s2">)</span>
+            <span class="s2">}</span>
+        <span class="s2">},</span>
+    <span class="s2">) { </span><span class="s1">innerPadding </span><span class="s2">-&gt;</span>
+        <span class="s1">Box</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s1">paddingValues </span><span class="s2">= </span><span class="s1">innerPadding</span><span class="s2">)) {</span>
+            <span class="s0">when </span><span class="s2">(</span><span class="s1">currentScreen</span><span class="s2">) {</span>
+                <span class="s1">Screen</span><span class="s2">.</span><span class="s1">Dashboard </span><span class="s2">-&gt; </span><span class="s1">DashboardScreen</span><span class="s2">()</span>
+                <span class="s1">Screen</span><span class="s2">.</span><span class="s1">AddExpense </span><span class="s2">-&gt; </span><span class="s1">AddExpenseScreen</span><span class="s2">()</span>
+                <span class="s1">Screen</span><span class="s2">.</span><span class="s1">Reports </span><span class="s2">-&gt; </span><span class="s1">ReportsScreen</span><span class="s2">()</span>
+                <span class="s1">Screen</span><span class="s2">.</span><span class="s1">Categories </span><span class="s2">-&gt; </span><span class="s1">CategoryScreen</span><span class="s2">()</span>
+                <span class="s1">Screen</span><span class="s2">.</span><span class="s1">Profile </span><span class="s2">-&gt; </span><span class="s1">ProfileScreen</span><span class="s2">()</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">StarsBackground</span><span class="s2">() {</span>
+    <span class="s1">Box</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">()) {</span>
+        <span class="s1">repeat</span><span class="s2">(</span><span class="s1">times </span><span class="s2">= </span><span class="s5">50</span><span class="s2">) {</span>
+            <span class="s0">val </span><span class="s1">x </span><span class="s2">= </span><span class="s1">Random</span><span class="s2">.</span><span class="s1">nextFloat</span><span class="s2">()</span>
+            <span class="s0">val </span><span class="s1">y </span><span class="s2">= </span><span class="s1">Random</span><span class="s2">.</span><span class="s1">nextFloat</span><span class="s2">()</span>
+            <span class="s0">val </span><span class="s1">size </span><span class="s2">= </span><span class="s1">Random</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">from </span><span class="s2">= </span><span class="s5">1</span><span class="s2">, </span><span class="s1">until </span><span class="s2">= </span><span class="s5">4</span><span class="s2">).</span><span class="s1">dp</span>
+            <span class="s0">val </span><span class="s1">alpha </span><span class="s2">= </span><span class="s1">Random</span><span class="s2">.</span><span class="s1">nextFloat</span><span class="s2">()</span>
+            
+            <span class="s1">Box</span><span class="s2">(</span>
+                <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+                    <span class="s2">.</span><span class="s1">offset</span><span class="s2">(</span>
+                        <span class="s1">x </span><span class="s2">= (</span><span class="s1">x </span><span class="s2">* </span><span class="s5">400</span><span class="s2">).</span><span class="s1">dp</span><span class="s2">,</span>
+                        <span class="s1">y </span><span class="s2">= (</span><span class="s1">y </span><span class="s2">* </span><span class="s5">800</span><span class="s2">).</span><span class="s1">dp</span><span class="s2">,</span>
+                    <span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">size</span><span class="s2">(</span><span class="s1">size </span><span class="s2">= </span><span class="s1">size</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">background</span><span class="s2">(</span><span class="s1">color </span><span class="s2">= </span><span class="s1">StarColor</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">alpha </span><span class="s2">= </span><span class="s1">alpha</span><span class="s2">), </span><span class="s1">shape </span><span class="s2">= </span><span class="s1">CircleShape</span><span class="s2">),</span>
+            <span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">enum </span><span class="s0">class </span><span class="s1">Screen </span><span class="s2">{</span>
+    <span class="s1">Dashboard</span><span class="s2">, </span><span class="s1">AddExpense</span><span class="s2">, </span><span class="s1">Reports</span><span class="s2">, </span><span class="s1">Categories</span><span class="s2">, </span><span class="s1">Profile</span>
+<span class="s2">}</span>
+
+<span class="s1">@Preview</span><span class="s2">(</span><span class="s1">showBackground </span><span class="s2">= </span><span class="s0">true</span><span class="s2">)</span>
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">DashboardPreview</span><span class="s2">() {</span>
+    <span class="s1">SmartBudgetSA10Theme </span><span class="s2">{</span>
+        <span class="s1">DashboardScreen</span><span class="s2">()</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

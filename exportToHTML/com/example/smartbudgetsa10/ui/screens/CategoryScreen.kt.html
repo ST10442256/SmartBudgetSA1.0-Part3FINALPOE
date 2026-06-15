@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>CategoryScreen.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CategoryScreen.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">screens</span>
+
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">background</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.*</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">lazy</span><span class="s2">.</span><span class="s1">LazyColumn</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">lazy</span><span class="s2">.</span><span class="s1">items</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.*</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.*</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Alignment</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Modifier</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">res</span><span class="s2">.</span><span class="s1">painterResource</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">unit</span><span class="s2">.</span><span class="s1">dp</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">R</span>
+
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">platform</span><span class="s2">.</span><span class="s1">LocalContext</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">smartbudgetsa10</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">BudgetManager</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">CategoryScreen</span><span class="s2">(</span><span class="s1">modifier: Modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">) {</span>
+    <span class="s0">val </span><span class="s1">context </span><span class="s2">= </span><span class="s1">LocalContext</span><span class="s2">.</span><span class="s1">current</span>
+    <span class="s0">var </span><span class="s1">categoryName by remember </span><span class="s2">{ </span><span class="s1">mutableStateOf</span><span class="s2">(</span><span class="s1">value </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">) }</span>
+    <span class="s0">val </span><span class="s1">categories </span><span class="s2">= </span><span class="s1">remember </span><span class="s2">{ </span>
+        <span class="s1">mutableStateListOf</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt;().</span><span class="s1">apply </span><span class="s2">{ </span>
+            <span class="s1">addAll</span><span class="s2">(</span><span class="s1">BudgetManager</span><span class="s2">.</span><span class="s1">getCategories</span><span class="s2">(</span><span class="s1">context</span><span class="s2">)) </span>
+        <span class="s2">} </span>
+    <span class="s2">}</span>
+
+    <span class="s1">Column</span><span class="s2">(</span>
+        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">modifier</span>
+            <span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">()</span>
+            <span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s4">16</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">),</span>
+        <span class="s1">verticalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">spacedBy</span><span class="s2">(</span><span class="s4">16</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">),</span>
+    <span class="s2">) {</span>
+        <span class="s1">Text</span><span class="s2">(</span>
+            <span class="s1">text </span><span class="s2">= </span><span class="s3">&quot;Manage Categories&quot;</span><span class="s2">,</span>
+            <span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">headlineMedium</span><span class="s2">,</span>
+            <span class="s1">color </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span>
+        <span class="s2">)</span>
+
+        <span class="s1">Row</span><span class="s2">(</span>
+            <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">fillMaxWidth</span><span class="s2">(),</span>
+            <span class="s1">verticalAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">CenterVertically</span><span class="s2">,</span>
+            <span class="s1">horizontalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">spacedBy</span><span class="s2">(</span><span class="s4">8</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)</span>
+        <span class="s2">) {</span>
+            <span class="s1">OutlinedTextField</span><span class="s2">(</span>
+                <span class="s1">value </span><span class="s2">= </span><span class="s1">categoryName</span><span class="s2">,</span>
+                <span class="s1">onValueChange </span><span class="s2">= { </span><span class="s1">categoryName </span><span class="s2">= </span><span class="s1">it </span><span class="s2">},</span>
+                <span class="s1">label </span><span class="s2">= { </span><span class="s1">Text</span><span class="s2">(</span><span class="s3">&quot;New Category&quot;</span><span class="s2">) },</span>
+                <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">weight</span><span class="s2">(</span><span class="s4">1f</span><span class="s2">)</span>
+            <span class="s2">)</span>
+            <span class="s1">IconButton</span><span class="s2">(</span>
+                <span class="s1">onClick </span><span class="s2">= {</span>
+                    <span class="s0">if </span><span class="s2">(</span><span class="s1">categoryName</span><span class="s2">.</span><span class="s1">isNotBlank</span><span class="s2">()) {</span>
+                        <span class="s1">BudgetManager</span><span class="s2">.</span><span class="s1">saveCategory</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s1">categoryName</span><span class="s2">)</span>
+                        <span class="s0">if </span><span class="s2">(!</span><span class="s1">categories</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">categoryName</span><span class="s2">)) {</span>
+                            <span class="s1">categories</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">categoryName</span><span class="s2">)</span>
+                        <span class="s2">}</span>
+                        <span class="s1">categoryName </span><span class="s2">= </span><span class="s3">&quot;&quot;</span>
+                    <span class="s2">}</span>
+                <span class="s2">},</span>
+                <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+                    <span class="s2">.</span><span class="s1">size</span><span class="s2">(</span><span class="s4">56</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">background</span><span class="s2">(</span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">primary</span><span class="s2">, </span><span class="s1">shape </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">shapes</span><span class="s2">.</span><span class="s1">medium</span><span class="s2">)</span>
+            <span class="s2">) {</span>
+                <span class="s1">Icon</span><span class="s2">(</span>
+                    <span class="s1">painter </span><span class="s2">= </span><span class="s1">painterResource</span><span class="s2">(</span><span class="s1">id </span><span class="s2">= </span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">ic_add</span><span class="s2">),</span>
+                    <span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Add&quot;</span><span class="s2">,</span>
+                    <span class="s1">tint </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">onPrimary</span>
+                <span class="s2">)</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">HorizontalDivider</span><span class="s2">()</span>
+
+        <span class="s1">LazyColumn</span><span class="s2">(</span>
+            <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">fillMaxWidth</span><span class="s2">(),</span>
+            <span class="s1">verticalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">spacedBy</span><span class="s2">(</span><span class="s4">8</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)</span>
+        <span class="s2">) {</span>
+            <span class="s1">items</span><span class="s2">(</span><span class="s1">categories</span><span class="s2">) { </span><span class="s1">category </span><span class="s2">-&gt;</span>
+                <span class="s1">CategoryItem</span><span class="s2">(</span><span class="s1">name </span><span class="s2">= </span><span class="s1">category</span><span class="s2">)</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">CategoryItem</span><span class="s2">(</span><span class="s1">name: String</span><span class="s2">) {</span>
+    <span class="s1">Surface</span><span class="s2">(</span>
+        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">fillMaxWidth</span><span class="s2">(),</span>
+        <span class="s1">shape </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">shapes</span><span class="s2">.</span><span class="s1">medium</span><span class="s2">,</span>
+        <span class="s1">color </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">colorScheme</span><span class="s2">.</span><span class="s1">secondaryContainer</span>
+    <span class="s2">) {</span>
+        <span class="s1">Row</span><span class="s2">(</span>
+            <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s4">16</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">),</span>
+            <span class="s1">verticalAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">CenterVertically</span><span class="s2">,</span>
+            <span class="s1">horizontalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">SpaceBetween</span>
+        <span class="s2">) {</span>
+            <span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s1">name</span><span class="s2">, </span><span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">bodyLarge</span><span class="s2">)</span>
+            <span class="s5">// Edit/Delete buttons could go here</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>
