@@ -1,1 +1,41 @@
 /build
+/.gradle
+.gradle/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Gradle
+gradle-wrapper.jar
+
+# Local properties
+local.properties
+
+# Build outputs
+*.apk
+*.aab
+*.aar
+
+# Android Studio
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Test coverage
+coverage/
+
+# Kotlin
+.kotlin/
+
+# OS files
+Thumbs.db
+.env
+
+# Logs
+*.log
