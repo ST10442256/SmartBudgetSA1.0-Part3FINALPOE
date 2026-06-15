@@ -1,6 +1,7 @@
 package com.example.smartbudgetsa10
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -23,12 +24,20 @@ import com.example.smartbudgetsa10.ui.theme.*
 import com.example.smartbudgetsa10.util.BiometricHelper
 import kotlin.random.Random
 
+/**
+ * MainActivity serves as the entry point for the SmartBudget SA 1.0 application.
+ * It manages the top-level navigation state, including Login, Registration, 
+ * and the Biometric Authentication flow before allowing access to the Main App.
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Log the start of the application for debugging and audit purposes
+        Log.d("MainActivity", "onCreate: SmartBudget SA 1.0 starting")
         enableEdgeToEdge()
         setContent {
             SmartBudgetSA10Theme {
+                // State variables to track navigation and authentication status
                 var currentNavState by remember { mutableStateOf(value = NavState.Login) }
                 var isUnlocked by remember { mutableStateOf(value = false) }
 
@@ -43,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     StarsBackground()
 
+                    // Main Navigation Controller using a simple state-based 'when' block
                     when (currentNavState) {
                         NavState.Login -> LoginScreen(
                             onLoginSuccess = { 
@@ -55,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                             onNavigateToLogin = { currentNavState = NavState.Login },
                         )
                         NavState.BiometricCheck -> {
+                            // Check if hardware biometrics are available before showing the unlock screen
                             val biometricAvailable = remember { BiometricHelper.isBiometricAvailable(this@MainActivity) }
                             if (!biometricAvailable || isUnlocked) {
                                 MainApp()

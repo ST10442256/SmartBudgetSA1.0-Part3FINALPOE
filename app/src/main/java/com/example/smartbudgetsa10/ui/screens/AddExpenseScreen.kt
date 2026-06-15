@@ -3,6 +3,7 @@ package com.example.smartbudgetsa10.ui.screens
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -30,6 +31,7 @@ import java.util.UUID
 @Composable
 fun AddExpenseScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    val currency = BudgetManager.getCurrency(context)
     var amount by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("Select Category") }
@@ -70,7 +72,7 @@ fun AddExpenseScreen(modifier: Modifier = Modifier) {
             label = { Text(text = "Amount") },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            prefix = { Text(text = "R") },
+            prefix = { Text(text = currency) },
         )
 
         OutlinedTextField(
@@ -150,19 +152,28 @@ fun AddExpenseScreen(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
+                // Parse amount and validate inputs
                 val amountDouble = amount.toDoubleOrNull()
                 if (amountDouble != null && description.isNotEmpty() && category != "Select Category") {
+                    Log.d("AddExpenseScreen", "User is saving an expense: $description of $currency$amountDouble")
+                    
                     val newExpense = Expense(
                         id = UUID.randomUUID().toString(),
                         amount = amountDouble,
                         description = description,
                         category = category
                     )
+                    
+                    // Save expense using BudgetManager (Persistence)
                     BudgetManager.saveExpense(context, newExpense)
+                    
+                    // Reset fields and show feedback
                     amount = ""
                     description = ""
                     category = "Select Category"
                     showMessage = true
+                } else {
+                    Log.w("AddExpenseScreen", "Invalid input attempted for expense saving")
                 }
             },
             modifier = Modifier.fillMaxWidth(),

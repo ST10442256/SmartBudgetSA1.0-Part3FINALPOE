@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import com.example.smartbudgetsa10.R
 import com.example.smartbudgetsa10.util.BudgetManager
 import java.util.Locale
@@ -29,7 +30,21 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
     var showBudgetDialog by remember { mutableStateOf(false) }
     var expenses by remember { mutableStateOf(BudgetManager.getExpenses(context)) }
     var monthlyBudget by remember { mutableStateOf(BudgetManager.getMonthlyBudget(context)) }
+    val currency = BudgetManager.getCurrency(context)
     
+    // Own Feature 2: Search Expenses
+    var searchQuery by remember { mutableStateOf("") }
+    val filteredExpenses = remember(expenses, searchQuery) {
+        if (searchQuery.isEmpty()) {
+            expenses
+        } else {
+            expenses.filter { 
+                it.description.contains(searchQuery, ignoreCase = true) || 
+                it.category.contains(searchQuery, ignoreCase = true) 
+            }
+        }
+    }
+
     val totalExpenses = expenses.sumOf { it.amount }
     val remainingBudget = monthlyBudget - totalExpenses
     val safeToSpend = if (remainingBudget > 0.0) remainingBudget else 0.0
@@ -58,26 +73,39 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         item {
-            BalanceCard(safeToSpend, totalExpenses, monthlyBudget, onAdjustBudget = { showBudgetDialog = true })
+            BalanceCard(safeToSpend, totalExpenses, monthlyBudget, currency, onAdjustBudget = { showBudgetDialog = true })
         }
         item {
-            BudgetProgressSection(progress, remainingBudget)
+            BudgetProgressSection(progress, remainingBudget, currency)
         }
         if (totalExpenses > monthlyBudget) {
             item {
                 AlertSection()
             }
         }
+
+        // Search Bar
+        item {
+            OutlinedTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                label = { Text(stringResource(id = R.string.search_expenses)) },
+                modifier = Modifier.fillMaxWidth(),
+                leadingIcon = { Icon(painterResource(id = R.drawable.ic_dashboard), contentDescription = null) },
+                singleLine = true
+            )
+        }
+
         item {
             Text(
-                text = stringResource(id = R.string.recent_expenses),
+                text = if (searchQuery.isEmpty()) stringResource(id = R.string.recent_expenses) else "Search Results",
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.primary
             )
         }
-        // Real data for recent expenses
-        items(expenses.reversed().take(5)) { expense ->
-            ExpenseItem(name = expense.description, amount = "R${String.format(Locale.getDefault(), "%.2f", expense.amount)}")
+        
+        items(filteredExpenses.reversed().take(if (searchQuery.isEmpty()) 5 else 20)) { expense ->
+            ExpenseItem(name = expense.description, amount = "$currency${String.format(Locale.getDefault(), "%.2f", expense.amount)}")
         }
     }
 }
@@ -140,7 +168,7 @@ fun AdjustBudgetDialog(
 }
 
 @Composable
-fun BalanceCard(safeToSpend: Double, totalBalance: Double, monthlyBudget: Double, onAdjustBudget: () -> Unit) {
+fun BalanceCard(safeToSpend: Double, totalBalance: Double, monthlyBudget: Double, currency: String, onAdjustBudget: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
@@ -154,7 +182,7 @@ fun BalanceCard(safeToSpend: Double, totalBalance: Double, monthlyBudget: Double
                 style = MaterialTheme.typography.labelLarge
             )
             Text(
-                text = "R${String.format(Locale.getDefault(), "%.2f", safeToSpend)}",
+                text = "$currency${String.format(Locale.getDefault(), "%.2f", safeToSpend)}",
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = 40.sp,
@@ -168,11 +196,11 @@ fun BalanceCard(safeToSpend: Double, totalBalance: Double, monthlyBudget: Double
             ) {
                 Column {
                     Text(text = stringResource(id = R.string.total_balance), style = MaterialTheme.typography.labelSmall)
-                    Text(text = "R${String.format(Locale.getDefault(), "%.2f", totalBalance)}", style = MaterialTheme.typography.bodyLarge)
+                    Text(text = "$currency${String.format(Locale.getDefault(), "%.2f", totalBalance)}", style = MaterialTheme.typography.bodyLarge)
                 }
                 Column(horizontalAlignment = Alignment.End) {
                     Text(text = stringResource(id = R.string.monthly_budget), style = MaterialTheme.typography.labelSmall)
-                    Text(text = "R${String.format(Locale.getDefault(), "%.2f", monthlyBudget)}", style = MaterialTheme.typography.bodyLarge)
+                    Text(text = "$currency${String.format(Locale.getDefault(), "%.2f", monthlyBudget)}", style = MaterialTheme.typography.bodyLarge)
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -188,7 +216,7 @@ fun BalanceCard(safeToSpend: Double, totalBalance: Double, monthlyBudget: Double
 }
 
 @Composable
-fun BudgetProgressSection(progress: Float, remaining: Double) {
+fun BudgetProgressSection(progress: Float, remaining: Double, currency: String) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -207,7 +235,7 @@ fun BudgetProgressSection(progress: Float, remaining: Double) {
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = stringResource(id = R.string.budget_remaining, String.format(Locale.getDefault(), "%.2f", remaining)),
+                text = stringResource(id = R.string.budget_remaining, "$currency${String.format(Locale.getDefault(), "%.2f", remaining)}"),
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.align(alignment = Alignment.End),
             )
